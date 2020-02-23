@@ -10,34 +10,25 @@
 <div class="container mt-3">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Stepik Travel</a>
+      <a class="navbar-brand" href="/">Stepik doesn't Travel</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" data-test="navigation">{% for about_departures_key,about_departures_value in about_departures.items() %}
           <li class="nav-item active">
-            <a class="nav-link" href="#">Из Москвы </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Из Петербурга</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Из Новосибирска</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Из Екатеринбурга</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Из Казани</a>
-          </li>
+            <a class="nav-link" href="/departure/{{ about_departures_key }}" data-test="navlink">{{ about_departures_value }}</a>
+          </li>{% endfor %}
         </ul>
       </div>
+
     </nav>
-
-
-    <h1 class="display-5 mt-4">Летим из <span data-test="from">Новосибирска</span></h1>
-    <p class="mb-4" >Найдено <span data-test="tourcount">15</span> туров, от <span data-test="pricemin">26000</span> до <span data-test="pricemax">84600</span> и от <span data-test="nightsmax">4</span> ночей до <span data-test="nightsmax">15</span> ночей</p>
+            {% set min = info_tour|min(attribute="price") %}
+            {% set max = info_tour|max(attribute="price") %}
+    {% set min_1 = info_tour|min(attribute="nights") %}
+    {% set max_1 = info_tour|max(attribute="nights") %}
+    <h1 class="display-5 mt-4">Летим <span data-test="from">{{ lst_departures|random }}</span></h1>
+    <p class="mb-4" >Найдено <span data-test="tourcount">{{ about_tour|length }}</span> туров, от <span data-test="pricemin">{{ min.price }}</span> до <span data-test="pricemax">{{ max.price }}</span> и от <span data-test="nightsmax">{{ min_1.nights }}</span> ночей до <span data-test="nightsmax">{{ max_1.nights }}</span> ночей</p>
     <!-- HERO -->
 
 
@@ -45,72 +36,18 @@
     <!-- CARDS -->
 
       <div class="row mt-5" data-test="cards">
-
+            {% for i in  random_tours %}
         <div class="col-4" data-test="card">
             <div class="card mb-3" >
-            <img src="https://place-hold.it/300x200" class="card-img-top img-fluid" data-test="picture">
+            <img src="{{ about_tour[i].picture }}" class="card-img-top img-fluid" data-test="picture">
             <div class="card-body">
-              <h5 class="card-title">Hotel title</h5>
-             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="" class="btn btn-sm btn-primary" data-test="tourlink">Подробнее</a>
+              <h5 class="card-title">{{ about_tour[i].title }}</h5>
+             <p class="card-text">{{ about_tour[i].description|truncate(90) }}</p>
+                <a href="/tour/{{i|int}}" class="btn btn-sm btn-primary" data-test="tourlink">Подробнее</a>
             </div>
         </div>
-        </div>
+        </div>{% endfor %}
 
-        <div class="col-4" data-test="card">
-            <div class="card mb-3" >
-            <img src="https://place-hold.it/300x200" class="card-img-top img-fluid" data-test="picture">
-            <div class="card-body">
-              <h5 class="card-title">Hotel title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="" class="btn btn-sm btn-primary" data-test="tourlink">Подробнее</a>
-            </div>
-        </div>
-        </div>
-
-        <div class="col-4" data-test="card">
-            <div class="card mb-3" >
-            <img src="https://place-hold.it/300x200" class="card-img-top img-fluid" data-test="picture">
-            <div class="card-body">
-             <h5 class="card-title">Hotel title</h5>
-             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-             <a href="" class="btn btn-sm btn-primary" data-test="tourlink">Подробнее</a>
-            </div>
-        </div>
-        </div>
-
-        <div class="col-4" data-test="card">
-            <div class="card mb-3" >
-            <img src="https://place-hold.it/300x200" class="card-img-top img-fluid" data-test="picture">
-            <div class="card-body">
-              <h5 class="card-title">Hotel title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="" class="btn btn-sm btn-primary" data-test="tourlink">Подробнее</a>
-            </div>
-        </div>
-        </div>
-
-        <div class="col-4" data-test="card">
-            <div class="card mb-3" >
-            <img src="https://place-hold.it/300x200" class="card-img-top img-fluid" data-test="picture">
-            <div class="card-body">
-              <h5 class="card-title">Hotel title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="" class="btn btn-sm btn-primary" data-test="tourlink">Подробнее</a>
-            </div>
-        </div>
-        </div>
-
-        <div class="col-4" data-test="card">
-            <div class="card mb-3" >
-            <img src="https://place-hold.it/300x200" class="card-img-top img-fluid" data-test="picture">
-            <div class="card-body">
-              <h5 class="card-title">Hotel title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="" class="btn btn-sm btn-primary"  data-test="tourlink">Подробнее</a>
-            </div>
-        </div>
-        </div>
     </div>
 
 </div>
