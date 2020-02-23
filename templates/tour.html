@@ -1,33 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>"Stepik Travel"</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
-
-<div class="container mt-3">
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/">Stepik doesn't Travel</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav" data-test="navigation">{% for about_departures_key,about_departures_value in about_departures.items() %}
-          <li class="nav-item active">
-            <a class="nav-link" href="/departure/{{ about_departures_key }}" data-test="navlink">{{ about_departures_value }}</a>
-          </li>{% endfor %}
-        </ul>
-      </div>
-    </nav>
-
-
+{% extends 'base.html' %}
+{% block tour1 %}
     <h1 class="display-3 mt-4" data-test="title">{{ about_tour.title }}</h1>
-
+{% endblock %}
     <!-- HERO -->
-
+{% block tour2 %}
     <p class="lead" data-test="lead"><span data-test="country">{{ about_tour.country }}</span><span data-text="departure"> {{ about_departures[about_tour.departure] }}</span> <span data-text="nights">на {{ about_tour.nights }}</span> ночей</p>
 
     <img data-test="picture" src="{{ about_tour.picture }}" class="w-75" alt="{{ about_tour.stars }}">
@@ -35,7 +12,4 @@
     <p class="my-4 w-75" data-test="description">{{ about_tour.description }}</p>
 
     <a href="https://www.paypal.com/ua/home" class="btn btn-success btn-lg" data-test="buybutton">Купить тур за <span data-test="price">{{ about_tour.price }}</span></a>
-</div>
-
-</body>
-</html>
+{% endblock %}
