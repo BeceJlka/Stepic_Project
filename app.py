@@ -3,6 +3,7 @@ from data import *
 import random
 
 app = Flask(__name__)
+
 random_tour = []
 search_tours = []
 for key, value in tours.items():
@@ -31,4 +32,5 @@ def tour(id):
                            info_tour=search_tours)
 
 
-app.run()
+if __name__ == '__main__':
+    app.run()
