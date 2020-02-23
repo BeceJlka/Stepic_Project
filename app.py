@@ -33,4 +33,4 @@ def tour(id):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=8000,debug=False)
