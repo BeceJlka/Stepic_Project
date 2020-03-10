@@ -1,36 +1,25 @@
-<!DOCTYPE html>
-
 {% extends 'base.html' %}
 
-        {% block index1 %}
+{% block index %}
 
-            {% set min = info_tour|min(attribute="price") %}
-            {% set max = info_tour|max(attribute="price") %}
-    {% set min_1 = info_tour|min(attribute="nights") %}
-    {% set max_1 = info_tour|max(attribute="nights") %}
-    <h1 class="display-5 mt-4">Летим <span data-test="from">{{ lst_departures|random }}</span></h1>
-    <p class="mb-4" >Найдено <span data-test="tourcount">{{ about_tour|length }}</span> туров, от <span data-test="pricemin">
-        {{ min.price }}</span> до <span data-test="pricemax">{{ max.price }}</span> и от <span data-test="nightsmax">
-        {{ min_1.nights }}</span> ночей до <span data-test="nightsmax">{{ max_1.nights }}</span> ночей</p>
-{% endblock %}
-    <!-- HERO -->
+    <h2 class="h5 text-center mb-5">Свободны прямо сейчас</h2>
+    {% for o in range(6) %}
+    <div class="row">
+      <div class="col-12 col-lg-10 offset-lg-1 m-auto">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3"><img src="{{ teacher[random[o]]['picture'] }}" class="img-fluid" alt=""></div>
+              <div class="col-9">
+                <p class="float-right">Рейтинг: {{teacher[random[o]]['rating']}} Ставка: {{teacher[random[o]]['price']}} / час</p>
+                <h2 class="h4">{{ teacher[random[o]]['name'] }}</h2>
+                <p>{{teacher[random[o]]['about']}}</p>
+                <a href="/profiles/{{random[o]|int}}" class="btn btn-outline-primary btn-sm mr-3 mb-2">Показать информаци и расписание</a>
 
-
-
-    <!-- CARDS -->
-{% block index2 %}
-      <div class="row mt-5" data-test="cards">
-            {% for i in  random_tours %}
-        <div class="col-4" data-test="card">
-            <div class="card mb-3" >
-            <img src="{{ about_tour[i].picture }}" class="card-img-top img-fluid" data-test="picture">
-            <div class="card-body">
-              <h5 class="card-title">{{ about_tour[i].title }}</h5>
-             <p class="card-text">{{ about_tour[i].description|truncate(90) }}</p>
-                <a href="/tour/{{i|int}}" class="btn btn-sm btn-primary" data-test="tourlink">Подробнее</a>
+              </div>
             </div>
+          </div>
         </div>
-        </div>{% endfor %}
-
-    </div>
+      </div>
+    </div>{% endfor %}
 {% endblock %}
